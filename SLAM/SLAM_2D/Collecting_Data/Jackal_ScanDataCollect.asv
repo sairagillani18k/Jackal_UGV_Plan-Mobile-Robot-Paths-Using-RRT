@@ -1,0 +1,25 @@
+clc
+clear all
+% close all
+
+scan_cell = {};
+count = 1;
+
+jackal_ip = '192.168.131.1';
+pc_ip = '192.168.131.235';
+initialize_ros(jackal_ip,pc_ip);
+setenv('ROS_MASTER_URI','http://192.168.131.1:11311/')
+%%
+laser = rossubscriber('/scan');
+
+tic;
+while toc < 600
+    % Collect information from laser scan
+    scan = receive(laser,1);
+    plot(scan);
+    scan_cell{1,count} = scan;
+    pause(1);
+    count = count + 1;
+end
+save(['cell_test.mat'],'cell_test');
+turn_off_ros
