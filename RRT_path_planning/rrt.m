@@ -1,0 +1,1 @@
+openExample('nav/PlanMobileRobotPathsUsing_RRT')
